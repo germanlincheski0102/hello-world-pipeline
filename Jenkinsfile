@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn -f my-app/ test'
             }
         }
         stage('Deploy') {
