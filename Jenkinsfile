@@ -15,6 +15,14 @@ pipeline {
                 sh 'mvn -f my-app/ test'
             }
         }
+	stage ('Scan and Build Jar File') {
+            steps {
+               withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
+                sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
