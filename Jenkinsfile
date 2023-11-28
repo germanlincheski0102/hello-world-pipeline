@@ -6,8 +6,8 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/germanlincheski0102/hello-world-pipeline.git'
-                sh 'mvn clean install'
-		sh 'mvn package'
+                sh 'mvn -f my-app/ clean install'
+		sh 'mvn -f my-app/ package'
             }
         }
         stage('Test') {
