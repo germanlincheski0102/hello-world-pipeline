@@ -1,10 +1,13 @@
 pipeline {
-    agent any
+    agent {
+	label 'Debian'
+    }	
     stages {
         stage('Build') {
             steps {
                 git 'https://github.com/germanlincheski0102/hello-world-pipeline.git'
-                sh 'mvn package'
+                sh 'mvn clean install'
+		sh 'mvn package'
             }
         }
         stage('Test') {
