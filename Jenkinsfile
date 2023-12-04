@@ -24,15 +24,14 @@ pipeline {
 
 	stage('cat README') {
       	    when {
-        	branch "feature-*"
+        	    branch "feature-*"
       		 }
             steps {
                 sh '''
                   cat README.md
                   '''
                   }
-                }
-        }
+    }
 
 	stage ('Scan and Build Jar File') {
             steps {
@@ -40,12 +39,12 @@ pipeline {
                 sh 'mvn -f my-app/ clean package sonar:sonar'
                 }
             }
-        }
+    }
 
-        stage('Deploy') {
+    stage('Deploy') {
             steps {
                 echo 'Deploying...'
             }
-        }
     }
+ }
 }
