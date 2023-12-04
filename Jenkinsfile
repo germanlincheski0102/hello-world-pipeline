@@ -20,6 +20,7 @@ pipeline {
             steps {
                 sh 'mvn -f my-app/ package'
            }
+	}
 
 	stage('cat README') {
       	    when {
