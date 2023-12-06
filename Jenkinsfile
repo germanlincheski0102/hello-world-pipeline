@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-        *stage('Quality Gate') {
+        stage('Quality Gate') {
             when {
                 anyOf{
                     branch "feature-*";
