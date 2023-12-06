@@ -8,27 +8,36 @@ pipeline {
     }
     stages {
         stage('Test') {
+            when {
+                anyOf{
+                    branch "feature-*";
+                    branch "dev";
+                }
+            }
             steps {
                 sh 'mvn -f my-app/ test'
             }
         }
 
 	    stage ('Build') {
+            when {
+                anyOf{
+                    branch "feature-*";
+                    branch "dev";
+                }
+            }
             steps {
                 sh 'mvn -f my-app/ package'
            }
         }
 
-	    stage('cat README') {
-      	    when {
-        	    branch "feature-*"
-      		 }
-            steps {
-                sh 'cat README.md'
-                  }
-        }
-
 	    stage ('Sonar analysis') {
+            when {
+                anyOf{
+                    branch "feature-*";
+                    branch "dev";
+                }
+            }
             steps {
                 echo '### Executing Sonar analysis ###'
                withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
@@ -38,11 +47,16 @@ pipeline {
         }
 
         /*stage('Quality Gate') {
-
+            when {
+                anyOf{
+                    branch "feature-*";
+                    branch "dev";
+                }
+            }
             steps {
                 script {
                     echo '### Quality Gate ###'
-                    timeout(time: 5, unit: 'MINUTES') {
+                    timeout(time: 1, unit: 'MINUTES') {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             echo '### NOT OK! ###'
@@ -60,4 +74,10 @@ pipeline {
             }
         }
     }
+
+    post { 
+        always {
+        echo 'Enviando mail de reporte' }
+        }
+
 }
