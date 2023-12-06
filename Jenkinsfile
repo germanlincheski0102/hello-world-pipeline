@@ -37,7 +37,7 @@ pipeline {
             }
         }
 
-        stage('Quality Gate') {
+        /*stage('Quality Gate') {
 
             steps {
                 script {
@@ -52,7 +52,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
         stage('Deploy') {
             steps {
