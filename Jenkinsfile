@@ -5,6 +5,7 @@ pipeline {
     options {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
     }
     stages {
         stage('Test') {
@@ -46,7 +47,7 @@ pipeline {
             }
         }
 
-        /*stage('Quality Gate') {
+        *stage('Quality Gate') {
             when {
                 anyOf{
                     branch "feature-*";
@@ -66,7 +67,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
         stage('Deploy') {
             steps {
