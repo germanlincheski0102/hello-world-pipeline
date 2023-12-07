@@ -76,10 +76,11 @@ pipeline {
                     branch 'dev';
                     branch 'release/*';
                 }
-	    }	
+	        }	
             steps {
 		echo 'Building Docker image'
             }
+        }
 
         stage('Deploy') {
             when {
