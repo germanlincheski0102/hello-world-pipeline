@@ -57,19 +57,39 @@ pipeline {
             steps {
                 script {
                     echo '### Quality Gate ###'
-                    timeout(time: 5, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
+                    timeout(time: 1, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                        /*def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             echo '### NOT OK! ###'
                             echo "Pipeline is UNSTABLE due to quality gate failure: ${qg.status}"
-                            currentBuild.result = 'UNSTABLE'
+                            currentBuild.result = 'UNSTABLE'*/
                         }
                     }
                 }
             }
         }
 
+        stage('Build and push new Docker image') {
+            when {
+                anyOf{
+                    branch 'dev';
+                    branch 'release/*';
+                }
+            }
+
+            steps {
+
+            }
+
+
         stage('Deploy') {
+            when {
+                anyOf{
+                    branch 'main';
+                    branch 'master';
+                }
+            }
             steps {
                 echo 'Deploying...'
             }
