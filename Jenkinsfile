@@ -7,6 +7,7 @@ pipeline {
         timeout(time: 10, unit: 'MINUTES')
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
     }
+
     stages {
         stage('Test') {
             when {
@@ -68,7 +69,6 @@ pipeline {
                     }
                 }
             }
-        }
 
         stage('Build and push new Docker image') {
             when {
@@ -93,7 +93,7 @@ pipeline {
                 echo 'Deploying...'
             }
         }
-
+    }
     post { 
         always {
         echo 'Enviando mail de reporte' }
