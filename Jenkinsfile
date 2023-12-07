@@ -57,7 +57,7 @@ pipeline {
             steps {
                 script {
                     echo '### Quality Gate ###'
-                    timeout(time: 1, unit: 'MINUTES') {
+                    timeout(time: 2, unit: 'MINUTES') {
                         waitForQualityGate abortPipeline: true
                         /*def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
@@ -93,11 +93,9 @@ pipeline {
                 echo 'Deploying...'
             }
         }
-    }
 
     post { 
         always {
         echo 'Enviando mail de reporte' }
-        }
-
+    }
 }
