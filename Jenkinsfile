@@ -41,7 +41,7 @@ pipeline {
             }
             steps {
                 echo '### Executing Sonar analysis ###'
-               withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
+                withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
                 sh 'mvn -f my-app/ clean package sonar:sonar'
                 }
             }
@@ -76,12 +76,10 @@ pipeline {
                     branch 'dev';
                     branch 'release/*';
                 }
-            }
-
+	    }	
             steps {
-
+		echo 'Building Docker image'
             }
-
 
         stage('Deploy') {
             when {
