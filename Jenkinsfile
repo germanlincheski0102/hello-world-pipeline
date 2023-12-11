@@ -63,7 +63,7 @@ pipeline {
                 script {
                     echo '### Quality Gate ###'
                     timeout(time: 2, unit: 'MINUTES') {
-                       /* waitForQualityGate abortPipeline: true */
+                        waitForQualityGate abortPipeline: true
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             echo '### NOT OK! ###'
@@ -71,6 +71,7 @@ pipeline {
                             currentBuild.result = 'UNSTABLE'
                         }
                     }
+                    echo 'Quality Gate Passed'
                 }
             }
         }
