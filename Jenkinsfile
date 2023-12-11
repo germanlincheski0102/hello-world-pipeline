@@ -8,7 +8,7 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
     }
     environment {
-        GIT_REPO="hello-world-pipeline"
+        GIT_REPO = "hello-world-pipeline"
     }
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
                 echo '### Executing Sonar analysis ###'
                 withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
                 sh 'mvn -f my-app/ clean package sonar:sonar'
-                -Dsonar.projectKey=$GIT_REPO
+                -Dsonar.projectKey=${GIT_REPO}
                 }
             }
         }
