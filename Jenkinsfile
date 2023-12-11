@@ -63,12 +63,12 @@ pipeline {
                 script {
                     echo '### Quality Gate ###'
                     timeout(time: 2, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
-                        /*def qg = waitForQualityGate()
+                       /* waitForQualityGate abortPipeline: true */
+                        def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             echo '### NOT OK! ###'
                             echo "Pipeline is UNSTABLE due to quality gate failure: ${qg.status}"
-                            currentBuild.result = 'UNSTABLE'*/
+                            currentBuild.result = 'UNSTABLE'
                         }
                     }
                 }
