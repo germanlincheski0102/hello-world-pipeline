@@ -73,6 +73,7 @@ pipeline {
                     }
                 }
             }
+        }
 
         stage('Build and push new Docker image') {
             when {
