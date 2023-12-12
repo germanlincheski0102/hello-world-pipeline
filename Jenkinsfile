@@ -21,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -f my-app/ test'
+                sh 'mvn -f ${APP_NAME} test'
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -f my-app/ package'
+                sh 'mvn -f ${APP_NAME} package'
            }
         }
 
@@ -92,8 +92,7 @@ pipeline {
         stage('Deploy') {
             when {
                 anyOf{
-                    branch 'main';
-                    branch 'master';
+                    branch 'main'
                 }
             }
             steps {
