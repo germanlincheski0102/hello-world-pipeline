@@ -9,6 +9,7 @@ pipeline {
     }
     environment {
         GIT_REPO = "hello-world-pipeline"
+        APP_NAME = "my-app/"
     }
 
     stages {
@@ -46,8 +47,8 @@ pipeline {
             steps {
                 echo '### Executing Static Sonar analysis ###'
                 withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
-                /*sh 'mvn -f my-app/ clean package sonar:sonar \ */
-                sh 'mvn clean package sonar:sonar \
+                sh 'mvn -f ${APP_NAME} clean package sonar:sonar \
+                /* sh 'mvn clean package sonar:sonar \ */
                 -Dsonar.projectKey=${GIT_REPO}'
                 }
             }
