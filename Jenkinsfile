@@ -73,12 +73,12 @@ pipeline {
             steps {
                 script {
 		            echo 'Building Docker image'
-                    docker build -t ${GIT_REPO} .
-                    /*echo AWS_ACCOUNT=\$AWS_ACCOUNT
+                    /*docker build -t ${GIT_REPO} .
+                    echo AWS_ACCOUNT=\$AWS_ACCOUNT
                     docker tag ${GIT_REPO}:latest
                     docker push */
                 }
-           }
+            }
         }
 
         stage('Deploy') {
@@ -94,7 +94,7 @@ pipeline {
         }
       }
     }
-    
+
     post { 
         always {
         echo 'Enviando mail de reporte' }
