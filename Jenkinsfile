@@ -88,10 +88,13 @@ pipeline {
                 }
             }
             steps {
-                echo 'Deploying...'
+                script {
+                    echo 'Deploying...'
             }
         }
+      }
     }
+    
     post { 
         always {
         echo 'Enviando mail de reporte' }
