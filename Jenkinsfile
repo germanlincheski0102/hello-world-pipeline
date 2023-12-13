@@ -25,19 +25,7 @@ pipeline {
             }
         }
 
-	    stage ('Build') {
-            when {
-                anyOf{
-                    branch "feature-*";
-                    branch "dev";
-                }
-            }
-            steps {
-                sh 'mvn -f ${APP_NAME} package'
-           }
-        }
-
-	    stage ('Sonar analysis') {
+	    stage ('Build & Sonar analysis') {
             when {
                 anyOf{
                     branch "feature-*";
@@ -67,17 +55,15 @@ pipeline {
                         waitForQualityGate abortPipeline: true
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
-                            echo '### NOT OK! ###'
-                            echo "Pipeline is UNSTABLE due to quality gate failure: ${qg.status}"
-                            currentBuild.result = 'UNSTABLE'
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
                         }
                     }
                     echo 'Quality Gate Passed'
                 }
             }
         }
-
-        stage('Build and push new Docker image') {
+        
+        stage('Build and push Docker image') {
             when {
                 anyOf{
                     branch 'dev';
@@ -85,8 +71,14 @@ pipeline {
                 }
 	        }	
             steps {
-		echo 'Building Docker image'
-            }
+                script {
+		            echo 'Building Docker image'
+                    docker build -t ${GIT_REPO} .
+                    /*echo AWS_ACCOUNT=\$AWS_ACCOUNT
+                    docker tag ${GIT_REPO}:latest
+                    docker push */
+                }
+           }
         }
 
         stage('Deploy') {
