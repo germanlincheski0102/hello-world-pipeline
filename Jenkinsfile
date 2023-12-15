@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo '### Executing Static Sonar analysis ###'
                 withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
-                sh 'mvn -f ${APP_NAME} clean package sonar:sonar \
+                sh 'mvn -f ${APP_NAME} clean package sonar:sonar -Pcoverage \
                 -Dsonar.projectKey=${GIT_REPO}'
                 }
             }
