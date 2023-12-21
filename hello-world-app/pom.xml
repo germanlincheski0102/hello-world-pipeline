@@ -16,7 +16,7 @@
    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
    <sonar.language>java</sonar.language>  
   </properties>
-  <name>my-app</name>
+  <name>hello-world-app</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
