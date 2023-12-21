@@ -9,7 +9,7 @@ pipeline {
     }
     environment {
         GIT_REPO = "hello-world-pipeline"
-        APP_NAME = "Hello-world-app"
+        APP_NAME = "hello-world-app"
     }
 
     stages {
