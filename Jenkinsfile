@@ -16,7 +16,7 @@ pipeline {
         stage('Test') {
             when {
                 anyOf{
-                    branch "feature-*";
+                    branch "feature*";
                     branch "dev";
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
                 echo '### Executing Static Sonar analysis ###'
                 withSonarQubeEnv(installationName: 'sonar_scanner', credentialsId: 'SonarQubeToken') {
                 sh 'mvn -f ${APP_NAME} clean package sonar:sonar -Pcoverage \
-                -Dsonar.projectKey=${GIT_REPO}'
+                -Dsonar.projectKey=${GIT_REPO}/${BRANCH_NAME}'
                 }
             }
         }
