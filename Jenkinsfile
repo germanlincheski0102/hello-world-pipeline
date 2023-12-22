@@ -21,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -f ${APP_NAME} test'
+                sh 'mvn -f pom.xml test'
             }
         }
 
