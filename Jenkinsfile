@@ -18,6 +18,7 @@ pipeline {
                 anyOf{
                     branch "feature*";
                     branch "dev";
+                    branch "uat";
                 }
             }
             steps {
@@ -30,6 +31,7 @@ pipeline {
                 anyOf{
                     branch "feature-*";
                     branch "dev";
+                    branch "uat";
                 }
             }
             steps {
@@ -48,6 +50,7 @@ pipeline {
                 anyOf{
                     branch "feature-*";
                     branch "dev";
+                    branch "uat";
                 }
             }
             steps {
@@ -68,8 +71,9 @@ pipeline {
         stage('Build and push Docker image') {
             when {
                 anyOf{
-                    branch 'dev';
-                    branch 'release/*';
+                    branch "dev";
+                    branch "uat";
+                    branch "release/*";
                 }
 	        }	
             steps {
