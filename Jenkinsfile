@@ -21,7 +21,6 @@ pipeline {
                 }
             }
             steps {
-                println pwd()
                 sh 'mvn test'
             }
         }
