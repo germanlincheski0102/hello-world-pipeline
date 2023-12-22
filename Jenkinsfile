@@ -21,7 +21,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn -f pom.xml test'
+                println pwd()
+                sh 'mvn test'
             }
         }
 
